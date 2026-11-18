@@ -1,15 +1,15 @@
-// firebase/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "aqui su dato",
-  authDomain: "aqui su dato",
-  projectId: "aqui su dato",
-  storageBucket: "aqui su dato",
-  messagingSenderId: "aqui su dato",
-  appId: "aqui su dato"
+  apiKey: "AIzaSyAxDISaS9Dd-z-DnZSEtgN9L-Jc1VkjdyI",
+  authDomain: "dogfind-7f5ae.firebaseapp.com",
+  projectId: "dogfind-7f5ae",
+  storageBucket: "dogfind-7f5ae.firebasestorage.app",
+  messagingSenderId: "192601467506",
+  appId: "1:192601467506:web:1cfc32e5a12eea353b30eb",
+  measurementId: "G-N2NKVRBVWK"
 };
 
 const app = initializeApp(firebaseConfig);

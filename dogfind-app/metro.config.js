@@ -1,12 +1,14 @@
-
+// metro.config.js
 const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
 const config = getDefaultConfig(__dirname);
 
-// Soluciona problemas con .cjs y Firebase
 config.resolver.sourceExts.push('cjs');
 
-// ⚠️ En algunas versiones, desactivar esta opción evita errores con Hermes
-config.resolver.unstable_enablePackageExports = false;
+
+config.resolver.extraNodeModules = {
+  'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+};
 
 module.exports = config;

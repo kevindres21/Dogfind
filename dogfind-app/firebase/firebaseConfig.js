@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAxDISaS9Dd-z-DnZSEtgN9L-Jc1VkjdyI",
+  apiKey: "AIzaSyAxxDiSAS0d-z-DnZsEtgN9L-Jc1VkjdyI",
   authDomain: "dogfind-7f5ae.firebaseapp.com",
   projectId: "dogfind-7f5ae",
   storageBucket: "dogfind-7f5ae.firebasestorage.app",
   messagingSenderId: "192601467506",
   appId: "1:192601467506:web:1cfc32e5a12eea353b30eb",
-  measurementId: "G-N2NKVRBVWK"
+  measurementId: "G-N2NKVRBVVK"
 };
 
 const app = initializeApp(firebaseConfig);

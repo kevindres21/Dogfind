@@ -33,8 +33,9 @@ export default function Registro() {
       // 3. Lo mandamos al Login
       navigation.navigate('Login'); 
 
-    } catch (error) {
-      Alert.alert('Error al registrarse', error.message);
+           } catch (error) {
+      console.error("ERROR DE FIREBASE:", error);
+      alert("Error: " + error.message); // Usamos alert de JS puro
     }
   };
 

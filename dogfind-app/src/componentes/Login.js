@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/firebaseConfig'; // Ajusta el path si es diferente
-//import { useNavigation } from '@react-navigation/native';}
+import { auth } from '../../firebase/firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
-
+import { Ionicons } from '@expo/vector-icons'; 
 
 export default function Login() {
   const [correo, setCorreo] = useState('');

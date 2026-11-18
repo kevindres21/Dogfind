@@ -19,50 +19,50 @@ export default function Login() {
     }
   };
 
+// ... (manten tus imports y la lógica de handleLogin) ...
+
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Iniciar Sesión</Text>
+      <View style={styles.card}>
+        <Ionicons name="paw" size={60} color="#4A90E2" style={{ alignSelf: 'center', marginBottom: 20 }} />
+        <Text style={styles.titulo}>Dogfind</Text>
+        <Text style={styles.subtitulo}>Inicia sesión para continuar</Text>
 
-      <TextInput
-        placeholder="Correo electrónico"
-        value={correo}
-        onChangeText={setCorreo}
-        style={styles.input}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Contraseña"
-        value={contrasena}
-        onChangeText={setContrasena}
-        style={styles.input}
-        secureTextEntry
-      />
+        <TextInput
+          placeholder="Correo electrónico"
+          value={correo}
+          onChangeText={setCorreo}
+          style={styles.input}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+        <TextInput
+          placeholder="Contraseña"
+          value={contrasena}
+          onChangeText={setContrasena}
+          style={styles.input}
+          secureTextEntry
+        />
 
-      <Button title="Ingresar" onPress={handleLogin} />
-      <View style={{ marginTop: 10 }}>
-        <Button title="¿No tienes cuenta? Regístrate" onPress={() => navigation.navigate('Registro')} />
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Ingresar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Registro')} style={{ marginTop: 15 }}>
+          <Text style={styles.linkText}>¿No tienes cuenta? Regístrate</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  titulo: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 12,
-    marginBottom: 12,
-    borderRadius: 6,
-  },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f7fa', padding: 20 },
+  card: { width: '100%', backgroundColor: '#fff', padding: 30, borderRadius: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 },
+  titulo: { fontSize: 28, fontWeight: 'bold', color: '#333', textAlign: 'center' },
+  subtitulo: { fontSize: 14, color: '#888', textAlign: 'center', marginBottom: 25 },
+  input: { backgroundColor: '#f9f9f9', borderWidth: 1, borderColor: '#eee', padding: 15, marginBottom: 15, borderRadius: 10 },
+  button: { backgroundColor: '#4A90E2', padding: 15, borderRadius: 10, alignItems: 'center', marginTop: 10 },
+  buttonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  linkText: { color: '#4A90E2', textAlign: 'center', fontSize: 14 }
 });

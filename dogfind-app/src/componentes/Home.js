@@ -1,34 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 
 export default function Home() {
-  const [data, setData] = useState([]);
-
+  const [razas, setRazas] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     const obtenerDatos = async () => {
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025");
-      const json = await res.json();
-      setData(json.results);
+      try {
+        const res = await fetch("https://dog.ceo/api/breeds/list/all");
+        const json = await res.json();
+        
+        // La API devuelve un objeto. Lo convertimos a un array de strings con los nombres de las razas.
+        const listaRazas = Object.keys(json.message);
+        setRazas(listaRazas);
+      } catch (error) {
+        console.error("Error al cargar las razas:", error);
+      } finally {
+        setCargando(false);
+      }
     };
-
     obtenerDatos();
-  }, []); // ← vacío si no usas tipoSeleccionado aún
+  }, []);
+
+  if (cargando) {
+    return (
+      <View style={styles.centrado}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Cargando razas...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView>
       <View style={styles.lista}>
-        {data.map((pokemon, index) => {
-          const id = pokemon.url.split("/")[6];
+        <Text style={styles.titulo}>Razas de Perros</Text>
+        {razas.map((raza, index) => {
           return (
             <View key={index} style={styles.item}>
-              <Text>{id} - {pokemon.name}</Text>
-              <Image
-                source={{
-                  uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-                }}
-                style={styles.imagen}
-              />
+              {/* Capitalizamos la primera letra de la raza */}
+              <Text style={styles.nombre}>
+                {raza.charAt(0).toUpperCase() + raza.slice(1)}
+              </Text>
             </View>
           );
         })}
@@ -38,30 +52,16 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  lista: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 5,
-    justifyContent: 'space-between',
-    padding: 10,
-  },
+  centrado: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  lista: { padding: 15 },
+  titulo: { fontSize: 22, fontWeight: 'bold', marginBottom: 15, textAlign: 'center' },
   item: {
-    backgroundColor: 'aliceblue',
-    width: '48%',
-    padding: 10,
-    alignItems: 'center',
-    marginBottom: 10,
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    backgroundColor: '#f9f9f9',
+    marginBottom: 5,
+    borderRadius: 5,
   },
-  imagen: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-  },
-  buscador: {
-    margin: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-  },
+  nombre: { fontSize: 16, textTransform: 'capitalize' },
 });

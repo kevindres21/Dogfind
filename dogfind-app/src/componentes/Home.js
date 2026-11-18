@@ -44,17 +44,17 @@ export default function Home() {
   if (cargando) {
     return (
       <View style={styles.centrado}>
-        <ActivityIndicator size="large" color="#4A90E2" />
-        <Text style={{ marginTop: 10, color: '#666' }}>Cargando perritos...</Text>
+        <ActivityIndicator size="large" color="#2C3E50" />
+        <Text style={{ marginTop: 10, color: '#7F8C8D' }}>Cargando perritos...</Text>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#f5f7fa" />
+      <StatusBar barStyle="light-content" backgroundColor="#2C3E50" />
       
-      {/* CABECERA */}
+      {/* CABECERA ELEGANTE */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Dogfind</Text>
         <Text style={styles.headerSubtitle}>Encuentra tu raza favorita</Text>
@@ -72,13 +72,13 @@ export default function Home() {
               <Text style={styles.cardTitle}>
                 {raza.charAt(0).toUpperCase() + raza.slice(1)}
               </Text>
-              <Ionicons name="paw" size={20} color="#4A90E2" />
+              <Ionicons name="paw" size={20} color="#E67E22" />
             </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
 
-      {/* MODAL ELEGANTE */}
+      {/* MODAL CON IMAGEN CENTRADA */}
       <Modal animationType="fade" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalView}>
@@ -87,15 +87,20 @@ export default function Home() {
                 {razaSeleccionada.charAt(0).toUpperCase() + razaSeleccionada.slice(1)}
               </Text>
               <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Ionicons name="close-circle" size={30} color="#ccc" />
+                <Ionicons name="close-circle" size={30} color="#BDC3C7" />
               </TouchableOpacity>
             </View>
 
+            {/* Contenedor de la imagen con fondo gris suave */}
             <View style={styles.imageContainer}>
               {imagenSeleccionada ? (
-                <Image source={{ uri: imagenSeleccionada }} style={styles.modalImage} />
+                <Image 
+                  source={{ uri: imagenSeleccionada }} 
+                  style={styles.modalImage} 
+                  resizeMode="contain" // <--- ESTO CENTRA Y AJUSTA LA IMAGEN SIN DEFORMARLA
+                />
               ) : (
-                <ActivityIndicator size="large" color="#4A90E2" />
+                <ActivityIndicator size="large" color="#2C3E50" />
               )}
             </View>
 
@@ -110,51 +115,57 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f7fa' },
-  centrado: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f7fa' },
+  // Colores base: Fondo #F4F6F7, Azul oscuro #2C3E50, Naranja #E67E22
+  container: { flex: 1, backgroundColor: '#F4F6F7' },
+  centrado: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F4F6F7' },
   
+  // Cabecera oscura
   header: {
     padding: 20,
     paddingTop: 50,
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    backgroundColor: '#2C3E50',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
     shadowRadius: 10,
-    elevation: 5,
-    marginBottom: 15,
+    elevation: 8,
+    marginBottom: 20,
+    alignItems: 'center',
   },
-  headerTitle: { fontSize: 28, fontWeight: 'bold', color: '#333' },
-  headerSubtitle: { fontSize: 14, color: '#888', marginTop: 5 },
+  headerTitle: { fontSize: 30, fontWeight: 'bold', color: '#FFF' },
+  headerSubtitle: { fontSize: 14, color: '#BDC3C7', marginTop: 5 },
 
-  lista: { paddingHorizontal: 20, paddingBottom: 20 },
+  lista: { paddingHorizontal: 20, paddingBottom: 30 },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     padding: 18,
-    borderRadius: 12,
+    borderRadius: 15,
     marginBottom: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
     shadowRadius: 5,
-    elevation: 2,
+    elevation: 3,
+    borderLeftWidth: 4, // Un detalle de color a la izquierda
+    borderLeftColor: '#E67E22',
   },
   cardContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  cardTitle: { fontSize: 18, fontWeight: '600', color: '#444', textTransform: 'capitalize' },
+  cardTitle: { fontSize: 18, fontWeight: '600', color: '#34495E', textTransform: 'capitalize' },
 
   // Modal
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.6)',
+    backgroundColor: 'rgba(44, 62, 80, 0.8)', // Fondo oscuro azulado
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalView: {
-    width: '85%',
-    backgroundColor: '#fff',
-    borderRadius: 20,
+    width: '90%',
+    maxWidth: 500, // Para que no se estire demasiado en pantallas grandes
+    backgroundColor: '#FFF',
+    borderRadius: 25,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
@@ -163,17 +174,30 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   modalHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
-  modalTitle: { fontSize: 24, fontWeight: 'bold', color: '#333', textTransform: 'capitalize' },
+  modalTitle: { fontSize: 22, fontWeight: 'bold', color: '#2C3E50', textTransform: 'capitalize' },
+  
+  // Contenedor de la imagen ajustado
   imageContainer: {
     width: '100%',
     height: 250,
     borderRadius: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#ECF0F1', // Fondo gris claro por si la imagen no llena todo
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     marginBottom: 15,
+    padding: 10, // Un pequeño margen interno
   },
-  modalImage: { width: '100%', height: '100%', resizeMode: 'cover' },
-  modalDescription: { fontSize: 14, color: '#666', textAlign: 'center', lineHeight: 20 },
+  modalImage: { 
+    width: '100%', 
+    height: '100%', 
+    borderRadius: 10,
+  },
+  modalDescription: { 
+    fontSize: 15, 
+    color: '#7F8C8D', 
+    textAlign: 'center', 
+    lineHeight: 22,
+    marginTop: 5
+  },
 });
